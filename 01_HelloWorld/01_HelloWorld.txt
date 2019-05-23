@@ -1,0 +1,45 @@
+In this lesson, you learn how to make the system output "Hello World!".
+This is the beginning for every language you learn, almost like a ritual.
+
+In the .h file, there are 2 headers (#pragma once, #include <iostream>)
+and there is a function declaration (void sayHelloWorld();)
+I will explain more about the exact bits in a later lesson, but try to recognize some of the parts of the function,
+and the #include header.
+
+Headers:
+#pragma once:
+Prevents issues with header file names and other small things that may cause bugs
+
+#include <iostream>:
+Includes the iostream (In/Out Stream) library into the file.
+
+Function Declaration:
+functionType functionName(functionParameterType functionParameterName);
+void sayHelloWorld(/*No parameters in this function*/);
+
+
+In the .cpp file, there is a header (#include "01_HelloWorld.h")
+and a function defenition
+(
+    void sayHelloWorld()
+    {
+        std::cout << "Hello World!" << std::endl;
+    }
+)
+
+Header:
+#include "01_HelloWorld.h":
+Includes the 01_HelloWorld.h file into the file.
+
+Function Defenition:
+void sayHelloWorld()
+{
+    std::cout << "Hello World!" << std::endl;
+}
+We state the function we are defining, open the body, put the code inside. The code calls the std::cout function,
+which opens a stream to the terminal, and shows whatever follows the << operator. after the second << operator,
+the function std::endl is called, which makes a new line in the stream, which we then close with a semicolon.
+
+If we were to include and call this function in main.cpp, compile and run it, the result would be 
+Hello World!
+in the terminal.
