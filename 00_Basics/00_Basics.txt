@@ -1,0 +1,49 @@
+C++ is a compiled language, meaning it needs to be compiled before it can be run.
+
+It was originally made in the year 1985, as an extension to the original C language. This was made to be
+"C with Classes", something we will get to soon. This language makes Object Oriented Programming (OOP) very
+easy.
+
+In the 00_Basics.cpp and 00_Basics.h files, you will see some words that may not make sense to you yet, but trust
+me, they will be very important soon.
+
+First important thing you need to know, C++ is a very diverse language, thusly, you will have to include many
+libraries into your code. The syntax is #include <> or #include "". The first is for libraries, the second
+is for your own files which have functions and varibales in them. It is always a good idea to #inlude <iostream>
+as it has almost all the basics you will ever need when learning or working on your own. (Ex.1)
+
+Using the using namespace function is a bad habit, so I do not recommend getting into the habit of doing this,
+but if you ever want to declutter some of your code, be ready for errors, but you can then get rid of scope operators
+for whichever library you called the function for. In this case, I called it for std::. This is the STandarD library,
+has all the standard functions, hence the name. An example is the std::cout function. Without using namespace std; you
+would need to type that in front of all your std:: based functions, which can get tiresome, but keeps everything clean.
+With this function call at the beginning, you would only require cout to call the function. (Ex.2)
+
+This is the main function. Pro tip: If you see () somewhere, that means whatever it is after is a function.
+It is the main function that the computer looks for when compiling, running ONLY what is called in there, but the calls
+do stack, so if a function is called in a function, in another one, in another one, it will still run. Why it says int before
+main() is something you will learn about in the Functions lessons. It may be difficult to grasp early on. (Ex.3)
+
+Something that will come in very handy for you is comments. If you have ever learned any other language, you will
+know just how important these are. The syntax for a comment is two forwardslashes. (Ex.4)
+
+This is the return function, but as you can see, it doesn't require (). This is because it is how the computer knows it is
+the end of a function, and just doesn't require it, as it is a non-usable word in variable, function, class, enumeration,
+and structure names. (Ex.5)
+
+This here is the basic main.cpp file that you will have, but you can add as many #include functions as you want,
+and you do not require, nor should use the using namespace function.
+
+(Ex.1)
+#include <iostream>
+
+(Ex.2)
+using namespace std;
+
+(Ex.3)
+int main()
+{
+    (Ex.4) // This is a comment
+
+    (Ex.5) return 0;
+}
