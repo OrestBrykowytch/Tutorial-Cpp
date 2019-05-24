@@ -1,0 +1,46 @@
+Variables, aguably the most important thing in a programming language. They are changable (unless state against
+this otherwise) bits of memory used to store some data. There are four main types, but in C++ there are many other 
+subclasses of variables, and you can even create your own using an Enumeration. Enums will be explained later in
+more detail. The four main types are Char (Single Character), String (A String of Characters, part of the
+<string> library, must be included to use), Int (Integer), Boolean (True/False). There are many different types of 
+these, and there are even prefixes that change everything, but I will go with the basics for now, and teach the
+advanced stuff in a later lesson.
+
+To declare a variable, you first state the type (Char, String, Int, Bool), and follow it with the name, and semicolon.
+
+Format 1: varType varName;
+    char firstInitial;
+    std::string fullName;
+    int age;
+    boolean isMale;
+
+To define a variable, there are two ways, either on declaration, or later in the program.
+Format 1: varType varName = varValue;
+    char firstInital = 'O';
+    std::string fullName = "Orest Brykowytch";
+    int age = 25;
+    bool isMale = true;
+
+Format 2: varName = varValue; (This is after the variable has been declared somewhere in the program)
+    firstInitial = 'O';
+    std::string fullName = "Orest Brykowytch";
+    int age = 25;
+    bool isMale = true;
+
+Remember the whole thing about "changable". Yes, variables values can be set and changed mid-program, and is more
+often done than not. What the program does is take space in memory, assign it to the value, and if it had anything
+in it first, scraps that, and then fills it up. This is especially nessecary to know when you get into vectors and arrays,
+but more on that later.
+
+In 02_Variables.h, we can see that I make a couple variables, and then in 02_Variables.cpp, I define them.
+This is typically not how it is done, but this is to make it easier to read and show.
+
+Notice in the .h file, I declare 4 variables, but only define 3 of them. Later in the .cpp file, I define the last
+variable, which is absolutely fine. This works just as well as defining on the spot when declaring. Later in the .cpp
+file, you can see, I redefine one of the variables, int age. I did the std::cout function before and after the change
+and both times, the std::cout works perfectly, and prints out the variable before and after the change as assigned.
+
+If this is confusing, just think, if you use a variable ANYWHERE, it will access it with the last definition before
+the function call, and it can be redefined almost anywhere (depends on scope, will explain in a later lesson), and
+if it is const, a keyword that sets the variable to not changable, EVER, and must be defined on the spot. I will go into
+more detail in another lesson about this, too.
