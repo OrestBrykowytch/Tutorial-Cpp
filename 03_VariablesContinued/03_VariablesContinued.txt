@@ -1,0 +1,24 @@
+In this lesson, I will teach you how to input to variables, and continue with outputing variables to the console.
+To Output a variable, it is very simple, and you already know how to do it, it was in the last lesson. The std::cont
+function outputs a stream of characters into the console until the user tells it to stop with a semicolon (;).
+This function works for non-variable strings in quotation marks (std::cout << "This is a non-variable string." << std::endl;),
+a variable (std::cout << varName << std::endl;), or a combination of the two. (std::cout << varName + "String" << std::endl;).
+Notice the plus sign between varName and "String". You cannot use the << operator in that scenario, as C++ just
+doesn't allow this. This is where problems may occur, as only string can be output like this, but to solve this,
+we use another function in the <string> library called std::to_string(varName) which turns any variable type into
+a string. It is a good habit to use the std::to_string() function when running multiple different variable types
+in one output stream.
+
+In the .h file, I make have 2 headers, and 2 variable declaration-definitions. The headers in this scenario are
+standard (no pun intended), of which <iostream> is used for the std::cout function, and <string> which gives us
+access to the std::string variable type, and std::to_string().
+
+The first variable declaration-definition is a string, so we first list the variable type (std::string), then we
+name the variable, stringExample, and finally define it as "This is the number: ". The second one uses the same
+format, as do all variables, but instead creates an integer type variable defined as 5.
+
+In the .cpp file, we include the .h file to give it access to all functions (of which there are 0), variables
+(of which there are 2), and headers (of which there are also 2). We then continue downwards in the file and see
+3 std::cout statements. The first prints to console only stringExample, following it by a new line, the second
+prints only intExample, and the last prints both, but also uses the std::to_string() function so the program runs
+smoothly.
