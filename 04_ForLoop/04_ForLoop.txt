@@ -1,0 +1,43 @@
+Another one of these very important things for all programmers to learn are Loops. These do exactly what they sound like, they loop 
+something for a certain amount of time. In the first of 4 main loops I will teach you is the For Loop. For the attentive ones that
+already caught a pattern here, it is a loop that loops FOR a certain amount of time/iterations. By iterations, I mean each time the
+loop is run through completely, that is one iteration. The syntax of a for loop is very easy to learn and memorize. It is very similar
+to most loops. The generic loop statement syntax is as follows.
+
+loopType (initialization of a variable; condition to run loop; increment initialized variable)
+{
+    doSomething();
+    doSomethingElse();
+}
+
+In this case, we have the for loop. The basics of this loop is that it takes the initialized variable from the header, checks it against
+the loop condition, and if it is met, will run the loop body, immediately thereafter incrementing the variable, and looping again until
+the condition is not met anymore. The variable can be called anything, but should be of type int (it makes everything easier for everyone)
+and doesn't need to have some extravagant name, as this variable can only be accessed in the scope of the loop. (More on scope later)
+Here is the syntax for a correct for loop.
+
+for (int i; i < something; ++i)
+{
+    runThis();
+}
+
+For all intents and purposes, you could have the increment statement be i++, but this saves crucial milliseconds in large programs and reduces
+stress on your CPU. It is so little, but it is a good habit to do this if you want to continue with this language onwards to larger projects.
+Typically the condition is something like array.size() which returns a variable of type int representing the size of an array of something.
+(More on arrays later). It is also used very commonly the int value of some variable that is in the scope of the loop.
+
+In the .h file, I made a function (More on functions later, this will all make sense in the future) that requests an variable of type int with
+name iterator, which then puts whatever is input into the scope of the loop, as it is in the function. The loop initializes a variable of type
+int i, checks if i is less than the value of iterator, and then increments i when the loop is completed. Inside the loop is something very familiar
+to us at this point, a common std::cout function, outputting the value of i + 1, this is equal to the value of int iterator. Why don't we use 
+int iterator to std::cout, you may ask? Well, the answer is quite simple, iterator isn't being incremented, it would just print out our value for
+iterator the number of times that is equal to the value of iterator itself, which isn't the point of this loop. In this loop, we are trying to get
+all numbers from 1 to the value of iterator to be printed on a new line. Why do we do i + 1, you may ask as well? Well, when you initialize a variable
+of type int, but don't define it, it defaults to the value of 0. We don't want 0 to the number -1 from iterator, so we increase it by 1 to counteract this.
+
+In the .cpp file, we declare a varibale of type int i, and ask for input which will define the variable. We then pass the variable into the function as
+the variable of type int iterator. The loop then runs until i is not less than the value of iterator. If this is difficult to grasp, that is fine, just 
+try to make loops that repeat something x amount of times, and after some practice, you will get the hang of it really quick.
+
+By the way, if you input a giant number, lets say something in the millions, such as 1000000 for example, you can see just how fast you computer is 
+running these iterations. With a number like 100, it is almost instantaneous. (Hint: It is really fast)
