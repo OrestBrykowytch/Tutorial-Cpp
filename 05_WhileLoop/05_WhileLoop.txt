@@ -1,0 +1,30 @@
+The second loop in the loop family that I will be teaching you about is the While loop. This one is probably the
+most self explanatory of them all. While something is true, run the loop and check again. There are many uses
+for the While Loop, such as the infinite loop, where the program will not terminate unless forcefully done so,
+typically with task manager for Windows or force quit if you are on MacOS. These can be dangerous, so I do not
+advise making such loops. Another common use for this is to have a persistant object stay somewhere until your
+character has reached a check-point, lets say. 
+
+while(notPassedQuest)
+{
+    Keep quest location pointer visible
+}
+
+If this was written in proper C++ syntax, the main structure would look similar, but some things would change.
+Although this has to do with Arimthmatic more than it does with Loops, the exclamation mark symbol (!) is very
+useful. It represents the keyword "not". This way, the following code: while (!Dead) { dead = false; } would be
+read as "While not dead: set dead to false". This is an absolutely unnecessary thing to ever write, but for the 
+purpose of example, this works just fine. Another way to write this, but a longer way is: while (Dead == false)
+{ blah blah blah; }. This operator (==) is the comparison operator, checks if the two things being compared are
+the same or not.
+
+A good rule of thumb is to always have a good plan on how the program will leave the loop. If you are comparing
+a variable value to a number, increment the value of the variable somewhere in the loop. If it is a true/false
+statement, have a condition that will make the conditional variable true/false to escape the loop. Otherwise, your
+program might crash, or you will have to kill it to not outdo your CPU or RAM.
+
+In the .h file, a function is created holding the loop, with the comparison variable named iterator of type int.
+Inside the loop, the first line runs the std::cout function, printing out the current value of iterator, and then
+making a new line in the output stream. It then increments iterator by 1, and runs the loop again. In the .cpp file
+the program asks for an iterator to be input, and uses that in the function. Whatever the iterator input by the
+user is, all numbers from there onto 20, will be counted, and put into the output stream.
