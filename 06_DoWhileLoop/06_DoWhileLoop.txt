@@ -1,0 +1,25 @@
+A cousin of the While Loop is the Do While loop. They are very similar, but with one main difference. A While Loop
+as we learned in the last lesson checks for the condition BEFORE running the loop, but a Do While Loop runs the
+code once before checking the conditional statement, then looping if necessary. The syntax for this loop is also
+very similar to the While Loop, but the conditional statement comes after. This Loop is useful if you want your
+code to run at least once through.
+
+do
+{
+    Program
+} while (conditional statement);
+
+Two very important things in this statement are putting the conditional statement on the same like as the "while"
+keyword and putting a semicolon (;) at the end of the conditional statement. This loop is a mixture of the While 
+and If Loops. You can put any type of C++ variables, but to keep everything easy without causing yourself to rip
+your hair out, do not use your structs as the conditional unless you really know what you are doing. You can also
+turn this into an infinite loop, but do watch out before you fry all your computer's circuitry.
+
+In the .h file, we make a void function named doWhileFunction, and inside of it, we declare 2 variables, and we
+declare and define one more. We open the Do While Loop, and inside, we increment the repeatAmount by one, and
+output to the console how many times the loop has been run, and asking a question, whether the person wants to
+loop through the loop again. After the output to stream, we ask for input in the form of a char type variable.
+The input is then compared in the if statement. If the input is y or Y, repeat is set to true, but if there is
+anything else, repeat is set to false. Once the if statement closes there, the final part of the Do While Loop
+is run. The condition is checked, and if repeat is true, the loop will run again, otherwise, it breaks, and it 
+ends there. Our function ends there, and so does the whole program. In the .cpp file, we just call the function.
