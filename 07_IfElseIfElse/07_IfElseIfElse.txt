@@ -1,0 +1,56 @@
+In the family of the If loop, there are three different statements that can be made from it. To begin, I will
+go over all three, and then teach you how to use them in context. First comes the if() statement. The syntax
+for it is just like almost any other loop, but instead of the usual (initializing, conditional, increment)
+combination, it only has the conditional statement inside the parenthesis. The syntax for an if () statement is
+
+if (something is true)
+{
+    do this
+}
+
+Next is the else if statement. For this, you have the same format as the if statement, but with a different
+keyword. This is placed after the first if statement, and used until the else statement.
+
+else if (something else is true)
+{
+    do this
+}
+
+Finally, the else statement. This is a lone keyword, and does not require a condition. The reason it doesn't need
+any conditional statement is the fact that this is always the last one in a chain of if statements, meaning all 
+other conditions should have been met before reaching this, or it will run.
+
+else
+{
+    do this
+}
+
+You can have as lengthy of if statements as you want, but at some point it is better just to use a switch statement
+which we will talk about in the next lesson. A full statement would look something like this, but again, it can have
+as many else ifs in the middle.
+
+if ()
+{
+
+}
+else if ()
+{
+
+}
+else
+{
+
+}
+
+It seems logical to do this as the first if checks the first condition, and like in speech, one would say, "else
+if", or "otherwise if", as if saying that there is more of the list to come. Finally, like in everyday speech,
+one would say "otherwise" or "lastly", which is equivalent to the else keyword.
+
+In the .h file, we make a function that takes two float variables as input, and uses them throughout the 
+function. Immediately, we open an if () statement, and give it the conditional (x > y), which checks if x is
+greater than y. If it is, it runs that part of the loop, and continues past the else at the end. If this has a 
+result of false, it moves on to the next condition, else if (x < y), checking if x is less than y. If it is,
+it runs that part of the loop, and continues past the else at the end. If both of these returned false, the
+final part of the loop is run, the else statement. There are only 3 combinations of conditions between 2 numbers,
+if one is greater than the second, if one is less than the second, and if both are equal. This loop checks off
+all three combinations, and life goes on. In the .cpp file, we just call the function again.
