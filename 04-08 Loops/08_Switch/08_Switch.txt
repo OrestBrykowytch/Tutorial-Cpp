@@ -1,0 +1,46 @@
+Last but not least in this "chapter" of your C++ learning is the Switch Statement. This is very similar to the
+If-Else If-Else statements we've been over, but this one has a couple of pros and cons when comparing these. A 
+Switch Statement can only take a int, char, or an enumerated type as its conditional statement. I will get
+into enumerations later on, but for now, try to stay with int and char types while using Switch Statements.
+What the switch statement does is take an expression (a variable) as an input, and compares that variable's
+value to the cases specified in the statement. Do watch out, as if you use an int as the input, but use a char
+in the cases, your system will break with a compiling error. The syntax for a Switch Statement is very easy to
+remember, and is very repetitive, like almost any other loop. 
+
+There will be 3 new keywords in this statement that you do not know yet: switch(), case :, and break;. The 
+switch() keyword is what starts your switch statement, and that pair of parentheses is where your input variable 
+goes in. The next keyword, case :, is where the comparisonhappens. What you put immediately after the case 
+keyword is what will be compared. If it is in single quotes(' '), it will be taken as a char, otherwise, an int.
+Finally, there is break;. This is used as the escape from the Switch Statement. In a normal loop, once the 
+condition is no longer met, it will stop looping, but a switch has to be escaped to move on in your program.
+The break; keyword is more there to optimize your code, and to make it easier on the compiler, (less compiling
+time, happier programmer), but is also useful for easier recognition of where everything ends. The syntax for
+a Switch Statement is:
+
+switch(inputVar)
+{
+    case inputVar_constantExpression:
+        doSomething();
+        break;
+    case inputVar_constantExpression:
+        doSomethingElse();
+        break;
+    case inputVar_constantExpression:
+        doAnotherDifferentThing();
+        break;
+    default:
+        doDefaultThing();
+        break;
+}
+
+First thing that may come to mind is "Hey, what in the world is inputVar_constantExpression?". Well, good question,
+and the answer is pretty understandable, I think. I just use this to say that it has to be an expression (value)
+of input_var. Also, that little default case at the bottom, that is there as a "safety net". If your input variable
+does not have the value stated in the case comparisons, it will run the default case, and then move.
+
+In the .h file, we create a function with an input variable x. We then open the Switch Statement, and give it
+the input of x, which is a int type variable. It takes the value of x, and compares it to the cases. We have cases
+ranging from 1-3, and a default case, which is used when the value stated is not equal to any of the comparison
+values. If the value of x matches any of the values in the comparisons, it will run the statements listed, and
+then break; from the overall statement. In the .cpp file, we just declare int x, and ask for input from the user.
+We then call the function, and run the whole program. 
