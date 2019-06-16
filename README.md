@@ -39,4 +39,3 @@ Commit Format - (Header: Commit (Commit Number) C-E-D (Add letter if Create/Edit
 
 # Collaborators 
 - Orest Brykowytch
-- DanCodes
