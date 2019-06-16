@@ -1,9 +1,9 @@
-Tutorial for C++
+# Tutorial for C++
 
 To use, either download, or copy paste into your editor. Access the .cpp file for that lesson, put what you want to run INSIDE main(), go to your terminal, find the directory you are currently in, and compile.
 
 
-Useful terminal commands:
+## Useful terminal commands:
 
 ```bash 
 $ ls -lt
@@ -31,6 +31,7 @@ $ ./a.out
 ``` 
 - This will run the computer-generated code you just compiled, and will run your code!
 
+# Contributors
 
 If you want to help, fork, or pull, and I will see what you can do, and most likely add you.
 
