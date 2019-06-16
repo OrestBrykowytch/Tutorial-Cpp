@@ -31,10 +31,12 @@ $ ./a.out
 ``` 
 - This will run the computer-generated code you just compiled, and will run your code!
 
-# Contributors
+# Contributing
 
 If you want to help, fork, or pull, and I will see what you can do, and most likely add you.
 
 Commit Format - (Header: Commit (Commit Number) C-E-D (Add letter if Create/Edit/Deleted Files in commit), Body: (Files Created | Files Edited (If any) | Files Deleted (If any) | Synopsis))
 
-Collaborators - Orest Brykowytch
+# Collaborators 
+- Orest Brykowytch
+- DanCodes
