@@ -1,0 +1,66 @@
+An array is an array (hence the name) of variables or elements which have the same variable type. An array is static, and has a 
+reserved memory location for all the elements upon declaration, which is one of the main differences between an Array and other
+element containers. Each value in an array has its own unique identifier in memory and accessor in the array. Arrays start from 
+0, so be careful when you create and access elements in an array. In a single array, only one variable type is allowed, and that
+is the one that is assigned to the array at declaration. Lets say we had an integer array given a length of 3, it would be able 
+to fit 3 different int values. Declaring and defining an array can be done in many ways. To declare an array using C++ built-in
+arrays, you use the format:
+
+varType arrayName[elementsAmount];
+
+To declare and define using C++ built-in arrays, there are 3 formats you can use.
+
+1. varType arrayName[elementsAmount] = { element#1, element#2 ... element#elementsAmount};
+2. varType arrayName[elementsAmount] = { element#1, element#2, ... element#anyNumberBelowElementsAmount };
+3. varType arrayName[elementsAmount] = {};
+
+In the first one, you declare the array, but to define, you but the equals sign, and in curly brackets list the elements in the
+array. The first one will be the first in the array, second one second, on and on until you reach the element number that equals
+the number in the square brackets []. This will fill the entire array with the values you assign to the elements.
+
+In the second one, you declare the array, and define any amount of elements that are less than the number in the [], but more
+than 1. The first will equal the first, the second the second in the array, on and on until you stop assigning elements. This
+will fill the array with the amount of elements you define, and places the default entry for the ones you do not define. In C++,
+the default is 0.
+
+In the third one, you are doing the same exact thing as just declaring it, but with 4 extra characters. Quite unnecessary, but
+whatever floats your boat. All elements are assigned the value 0.
+
+To define a specific value, you need to access the specific element in the array, and then assign the value to it. To do this,
+there is one good format:
+
+arrayName[elementNumeberToChange] = valueToAssign;
+
+Do keep in mind, an array starts with the number 0 when you are accessing its elements. This way, if you want to access the
+fourth element, you would access it with the accessor [3]. For the first element, the accessor is [0], so on, so forth.
+
+To access an element in the array, you call the array, and the element you want to access. This is a very similar process to 
+assigning a value. The format is:
+
+arrayName[elementNumberToAccess];
+
+There is a second way to make arrays which are only accessible if you use the #include <array> header. This gives you access
+to the array class. Declaring and defining is similar to the normal way, but to some people, this way is more structured, so
+they use it. The format for this version to declare is:
+
+std::array<varType, elementsAmount> arrayName;
+
+To declare and define using the <array> style, there are again 3 formats you can use, very similar to the C++ built-in style.
+
+1. std::array<varType, elementsAmount> arrayName = { element#1, element#2, ... element#elementsAmount };
+2. std::array<varType, elementAmount> arrayName = { element#1, element#2, ... element#anyNumberBelowElementsAmount };
+3. std::array<varYpe, elementAmount> = {};
+
+Assigning and accessing elements in this type of array is the same as C++ built-in style. The only things that change are the
+declaring and defining formats.
+
+In the .h file, we see a new header line, #include <array>. We learned in a previous lesson that #include includes a library
+and gives access to all the functions, classes, enums, etc of that library. In the <array> header, what we are really looking 
+for is the array constructor. This is something that is used in classes, and I will get into that soon. For a basic idea, it 
+constructs a new object, basically a compound variable. In this case, it creates an array as the object. We are also given
+access to the <array> header .size() function. With C++ built-in arrays, you cannot use .size(), as it comes up with an identifier
+error. This is another good reason to use #include <array> for your arrays. It is much easier to use .size() instead of having
+to use the size constant for that array. Next, we declare and define a void function, inside which we declare 6 arrays, 3 from 
+each array declaring style. We then use for loops to run through the whole loop to print out all the elements of the array. You
+can see the difference between the for loops. 3 have x < 5, while the other 3 have x < array.size(). In the .cpp file, we call
+the function, and that's basically it.
