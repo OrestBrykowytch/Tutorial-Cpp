@@ -54,13 +54,175 @@ To declare and define using the <array> style, there are again 3 formats you can
 Assigning and accessing elements in this type of array is the same as C++ built-in style. The only things that change are the
 declaring and defining formats.
 
-In the .h file, we see a new header line, #include <array>. We learned in a previous lesson that #include includes a library
-and gives access to all the functions, classes, enums, etc of that library. In the <array> header, what we are really looking 
-for is the array constructor. This is something that is used in classes, and I will get into that soon. For a basic idea, it 
-constructs a new object, basically a compound variable. In this case, it creates an array as the object. We are also given
-access to the <array> header .size() function. With C++ built-in arrays, you cannot use .size(), as it comes up with an identifier
-error. This is another good reason to use #include <array> for your arrays. It is much easier to use .size() instead of having
-to use the size constant for that array. Next, we declare and define a void function, inside which we declare 6 arrays, 3 from 
-each array declaring style. We then use for loops to run through the whole loop to print out all the elements of the array. You
-can see the difference between the for loops. 3 have x < 5, while the other 3 have x < array.size(). In the .cpp file, we call
-the function, and that's basically it.
+Next come all the member functions of the <array> header. All libraries in C++ have their own member functions, and those are 
+also parts of classes, something you will learn about rather soon. In the <array> header, we have 18 member functions, and these
+are all only usable on the std::array<>{} type of array. I will go over each one of them, but not in too much detail as to not
+bore you.
+
+
+1. std::array::at();
+
+This function checks whether some value or element is in the range of the array. It returns the element at the requested position
+in the array. It requires a parameter being the position of the element in the array. Format:
+
+arrayName.at(position);
+
+
+2. std::array::back();
+
+This function accesses the last element in the array, simple. Returns a reference to the element. Requires no parameters. Format:
+
+arrayName.back();
+
+
+3. std::array::begin();
+
+This function returns an value that points to the first element in the array. Basically, it returns the value of the first element
+in the array, an iterator to the beginning of the container. Requires no parameters. If using this to assign a value to a variable,
+use variable type "auto". The compiler will automatically set the variable type to whatever is first defined in it. Format:
+
+arrayName.begin();
+
+
+4. std::array::cbegin();
+
+This function returns a constant value that points to the first element in the array. This is the same as std::array::begin, but
+instead of returning a constant or non-constant value, returns only a constant value. This just means you can't use this reference to
+redefine a variable, even if the variable itself is not assigned as a constant variable. Requires no parameters. If using this to 
+assign a value to a variable, use variable type "auto". The compiler will automatically set the variable type to whatever is
+first defined in it. Format:
+
+arrayName.cbegin();
+
+
+5. std::array::cend();
+
+This function returns a constant value that points to the element immediately after the last array value. If your array is 5 
+elements large, it will return the computer's version of a 6. Like begin() and cbegin(), this is almost the same as end(), it just
+guarrantees a constant value to be returned. Requires no parameters. If using this to assign a value to a variable, use variable
+type "auto". The compiler will automatically set the variable type to whatever isfirst defined in it. Format:
+
+arrayName.cend();
+
+
+6. std::array::crbegin();
+
+This function returns a constant value that points to the reverse of the beginning (basically, the end). The reason this is used at
+all is because end() points to the element AFTER the end, whilst this one points at the last element. Since it is a constant-reverse
+begin function, it returns a constant value. Requires no parameters. If using this to assign a value to a variable, use variable type
+"auto". The compiler will automatically set the variable type to whatever is first defined in it. Format:
+
+arrayName.crbegin();
+
+
+7. std::array::crend();
+
+This function returns a constant value that points to the reverse of the end (the beginning). Since it is a constant-reverse begin
+function, it returns a constant value. Requires no parameters. If using this to assign a value to a variable, use variable type "auto".
+The compiler will automatically set the variable type to whatever is first defined in it. Format:
+
+arrayName.crend();
+
+
+8. std::array::data();
+
+This function returns a pointer to the first element of an array. Due to how arrays are stored in memory, a pointer that is returned can 
+be offset by some amount to retrieve a different element in the array. If the array is a const array, it will return a const value, otherwise
+it is normal. It requires no parameters. Format:
+
+arrayName.data();
+
+
+9. std::array::empty();
+
+This function returns a boolean value based upon whether the array is empty or not (has 0 space or not). The function is purely used for
+comparison, it does not edit any of the values or properties of the elements or array. If the array has a size of 0, it will return true (1),
+otherwise, it returns false (0) in the form of a constant expression (constexpr). Format:
+
+arrayName.empty();
+
+
+10. std::array::end();
+
+This function acts like cend(), but the result isn't always constant. That relatively it. There are no parameters. Format:
+
+arrayName.end();
+
+
+11. std::array::fill();
+
+This function sets all the values in the array to the value that is input into the function parameters. The input value must have the same 
+type as the array, or else the entire system will crash either during compilation, or execution. There is no return for this function.
+Format:
+
+arrayName.fill(valueToFillArrayWith);
+
+
+12. std::array::front();
+
+This function is used to return a direct reference to the first element in the array. It is different from std::array::begin because
+std::array::front returns a direct reference, while std::array::begin returns an iterator. If the array is declared const, this function
+returns a const reference. Format:
+
+arrayName.front();
+
+
+13. std::array::max_size();
+
+This function is very similar to std::array::size(), but returns a constant expression (constexpr) with the value of the maximum amount
+of elements that the array can hold. It is returned in the form of an unsigned int. .size() and .max_size() will always return the same 
+value. Format:
+
+arrayName.max_size();
+
+
+14. std::array::operator[];
+
+This function is the one that is used most often. It is very similar to the .at() function, but this one doesn't check the boundaries of 
+the array as it accesses the element. The .at() function will throw an error/exception if the number you input is outside the boundaries
+of the array, but this one will just call it false. This function takes one parameter in the form of a number, more specifically, an unsigned
+integral. The function returns a reference or a constant reference, based on what the array is (const/not-const respectively). Do remember
+that an array's first element has a position value of 0, like in most other programming languages. Format:
+
+arrayName[positionValue];
+
+
+15. std::array::rbegin();
+
+This function is just like .crbegin(), but does not guarrantee a constant to return. This, like the rest of non-const functions will return
+a constant iterator/reference when the array is such, but no other time. It will return the reverse iterator to the reverse beginning (end) \
+of the array. There are no parameters for this function. Format:
+
+arrayName.rbegin();
+
+
+16. std::array::rend();
+
+This function is the end equivalent of the rbegin function. It too returns the reverse iterator, but this time to the reverse end (beginning)
+of the array. Again, there are no parameters. Format:
+
+arrayName.rend();
+
+
+17. std::array::size();
+
+This is a function used quite often to assign a variable to the range of the array in a loop, the .size() function. It returns the size of the
+array in the form of a compile-time constant expression (constexpr). There are no parameters for this function, either. Format:
+
+arrayName.size();
+
+
+18. std::array::swap();
+
+This is the last member function alphabetically in the <array> header. As you can probably guess, it swaps the contents of 2 arrays,
+with each operation being linear and individual. For this function to run smoothly, the sizes of the arrays have to be the same, the
+type has to be the same, and they both must not be const. If these criteria are not fulfilled, errors will flood your system. Format:
+
+arrayName1.swap(arrayName2);
+
+
+In the .h file, we see a new header line, #include <array>. Forget about #include <cstring>, there is only one  function used from it and 
+is used only once. We learned in a previous lesson that #include includes a library and gives access to all the functions, classes, enums,
+etc of that library. In the .h file, I made a function for each of the member functions that are included in <array>, each with their own 
+arrays, variables, and methods. In this file is the explanation behind the member function, and in the .h file is all the corresponding code.
+In the .cpp file, we call all the functions, and that's basically it.
