@@ -1,0 +1,330 @@
+Second sequence container I will talk about is a Vector. Vectors are dymanic arrays, meaning they can change the amount of memory
+they take up, and can change their size during execution, and compilation as well. Like an array, a vector's elements can be
+accessed by pointers and be offset pointers. Vectors do not reallocate memory each time they grow, so they are very efficient
+with time, memory, and not busting your CPU. To do this, they preallocate a little bit more memory then they were declared with,
+but this helps in the future with processing times. In comparison to other sequence containers, Vectors are very fast and efficient
+when it comes to storing or deleting new data elements from the end of itself, but not as fast at adding and deleting from other 
+points in the array. Vectors also have less consistent iterators and references than other sequence containers. In this lesson, 
+as well as others, I will make a bunch of cross references to each other. Also, most member functions that come in the <vector>
+header are the same or relatively the same as other sequence container headers, so I will not go into too much detail, if any
+about them so I don't waste my time, or yours. I will still give an example in .h and .cpp, and run them, but will not write out
+long paragraphs about their uses and how they work like I did in the ninth lesson - Arrays. Unlike Arrays, there is only one
+style of making Vectors. There is no C++ build-in version, so you have to include the <vector> header, and then use one of these
+5 formats:
+
+1. std::vector<varType> vectorName;
+2. std::vector<varType> vectorName (elementsToFill, valueToFillThoseElements);
+3. std::vector<varType> vectorName (vectorToIterate.begin(), vectorToIterate.end());
+4. std::vector<varType> vectorName (vectorToCopy);
+5a. varType arrayName[elementsAmount];
+5b. std::vector<varType> vectorName (arrayName, arrayName + sizeof(arrayName) / sizeof(int));
+
+The first method of creating a Vector is by just declaring it. No elements are defined inside, so it is an empty Array at that 
+point. This is called the Empty Container Constructor or Default Constructor.
+
+The second method of creating a Vector involves stating how many elements to fill, and with what values to fill those elements.
+All elements are given the same value, and no more elements are created. This is called the Fill Constructor.
+
+The third method of creating a Vector is basically taking one vector, and copying it into another. This is called the Range
+Constructor.
+
+The fourth method of creating a Vector is copying a Vector into a new one. This is called the Copy Constructor. It is slightly
+different from the Range Constructor, but essentially do the same thing.
+
+The fifth is a little bit special. It requires an array to create, so this is a good way to transfer static arrays into dymanic
+ones. This is the complete creation process. This is called the Iterator Constructor.
+
+Given your knowledge of how basic arrays work, I think you should be able to figure out what all the small bits mean without me 
+having to explain it again.
+
+Just like in the array lesson, next come all the <vector> member functions. Again, I will not be covering them all in depth, as
+they do the same thing as in the <array> header. I will specify which functions are such, and the others, I will go in depth with.
+Altogether there are 31 <vector> member functions.
+
+1. std::vector::assign();
+
+The assign function assigns new values to the elements in the Vector, and automatically resizes the Vector to fit these elements.
+There are 3 different formats, all with different parameters. Written out are all the requirements to use the .assign() functions.
+
+1a.
+vectorName.assign(elementsAmount, valueToFillThoseElements);
+
+1b.
+std::vector<int>::iterator iteratorName = vectorName.begin() + (numberOfElementToStartAt + 1);
+vectorName.assign(iteratorName, vectorName.(element to end at));
+
+1c.
+arrayType arrayName[elementsAmount] = { values };
+vectorName.assign(arrayName, arrayName + (amount of elements you want to copy over));
+
+
+2. std::vector::at();
+
+This function is just like the <array> at() function. Takes one parameter, the element number you want to access in the Vector.
+Returns a reference, or a const reference if the vector is predefined const. Format:
+
+vectorName.at(elementNumber);
+
+
+3. std::vector::back();
+
+This function is exactly like the <array> version. Takes no parameters, returns a reference or const reference to the last element.
+Format:
+
+vectorName.back();
+
+
+4. std::vector::begin();
+
+Just like the <array> begin() function, this one returns an iterator/ const iterator pointing to the beginning (first) element of
+the Vector, depending on the const-qualification of the Vector itself. It takes no parameters. Format:
+
+vectorName.begin();
+
+
+5. std::vector::capacity();
+
+This is a new one for the <vector> class. It is very similar to size and max_size, but oyu have to keep in mind, a Vector is a
+dymanic Array, and as was previously stated, they preallocate a little bit more memory then they were declared with, so the capacity
+is always a tad more than the size. This function takes no parameters, and returns a number representing the amount of elements that
+can be stored in the Vector in its current state. Format:
+
+vectorName.capacity();
+
+
+6. std::vector::cbegin();
+
+Same as <array> cbegin() function. Returns a constant iterator that points to the beginning element of the Vector. There are no 
+parameters required. Format:
+
+vectorName.cbegin();
+
+
+7. std::vector::cend();
+
+Same as <array> cend() function. Returns a constant iterator that points to the end element of the Vector. There are no parameters that
+need to be passed in. Format:
+
+vectorName.cend();
+
+
+8. std::vector::clear();
+
+This function does exactly what it sounds like it does, it clears the Vector of all the elements, and destroys them, meaning the memory 
+allotedto the Vector is now 0, but is still dynamic, so it can grow or shrink later. There are no parameters for this function, and nothing
+is returned. Format:
+
+vectorName.clear();
+
+
+9. std::vector::crbegin();
+
+Like in the <array> header, crbegin() returns a constant reverse iterator that points to the last thing in the Vector. Again, there are 
+no parameters. Format:
+
+vectorName.crbegin();
+
+
+10. std::vector::crend();
+
+Again, like in the <array> header, crend() returns a constant reverse iterator that points to the first thing in the Vector. No parameters. 
+Format:
+
+vectorName.crend();
+
+
+11. std::vector::data();
+
+This function is slightly weird to get your head wrapped around, so I will try to explain it as best as I can. When calling this function, 
+you want to assign the return value to a variable, typically of type int. It returns a pointer to the first element that is in the Vector. 
+You can offset which element's value it is returning by using the incrementation or decrementation (++ or --) operators on the variable 
+storing the value. You basically assign a variable's value to the value of the first element in the array, but you can change which element's
+value is being stored by the variable with some basic operations. The recommended format to use this function in is:
+
+int* varName = vectorName.data();
+
+
+12. std::vector::emplace();
+
+This function is also slightly complicated, but you get used to it pretty fast. Before I explain what it does, I need to tell you that this
+function takes two (2) parameters, a constant iterator for the position, and a argument for the value. For the constant iterator, just put
+a number there, or a function that returns a number. OK, now, what the function does. It takes the position parameter, and emplaces (hence
+the name) a slot of memory for the argument in there. Whatever is typically in that space or after is moved one space up. This function
+basically makes your Vector one memory slot larger, and puts a value into the new memory slot. This is quite an inefficient function to use,
+but there is nothing you can do about it. Use this as little as you can if you want to keep your program running fast and smooth. There is a
+very similar function to this - insert(), which I will talk about later. If you are returning anything from this function, which you can, it
+will return to you an iterator that points to the new memory slot location. Format:
+
+vectorName.emplace(const_iterator positionToInsertTo, valueToInsert);
+
+
+13. std::vector::emplace_back();
+
+This function is very similar to emplace(), but as you can probably guess by the name of the function, it emplaces the new value at the back 
+(end) of the Vector, therefore, only one parameter is needed, and that is the value itself. Again, the Vector is expanded by one memory slot,
+but this time, nothing has to be offset or moved around, making this a much faster function to run. Format:
+
+vectorName.emplace_back(valueToInsert);
+
+
+14. std::vector::empty();
+
+No, this function does not empty out the Vector, but instead checks if the Vector is empty or not, returning a boolean value representing the 
+result. empty() takes no parameters. Format:
+
+vectorName.empty();
+
+
+15. std::vector::end();
+
+This function is the same as the <array> header end() function, returning an iterator pointing to the element after the last one. The iterator
+that is returned can be const if the element is const-qualified. Format:
+
+vectorName.end();
+
+
+16. std::vector::erase();
+
+This function is used to erase a certain element or certain elements in a Vector. There are two ways to use this function, and both take some
+parameters. The first one is used just to erase one element in the Vector, and the other deletes a range of elements in the Vector. Formats:
+
+vectorName.erase(vectorName.begin() + elementNumber);
+vectorName.erase(firstElementInRange, lastElementInRange);
+
+
+17. std::vector::front();
+
+This function, like in the <array> header, returns a reference pointing to the first element in the container, the Vector. The reference can be
+const or nonconst, based on how the element in the Vector is qualified. No parameters are taken. Format:
+
+vectorName.front();
+
+
+18. std::vector::get_allocator();
+
+This is a multiuse function, meaning it has functions that are used in tandem with it. get_allocator() lets you access the four functions
+.allocate(), .construct(), .destroy(), and .deallocate(). The reason I put a . before each function name is because this is a new way of using
+functions. Imagine, you need to call a function to open the use of another function. Well, this is what it is. We need to call get_allocator()
+to use any of the four listed. I will give a quick rundown of each function, its parameters, and what it does. First of all, we make a variable
+to use for navigation around the Vector. We can use that variable to use our first function, get_allocator().allocate(). Let me say first, for 
+all of these functions, get_allocator() never takes any parameters, only the second function in the series. .allocate() is used for allocating
+memory space for an array of elements inside the Vector. This function takes one parameter, and that is the amount of space you wish to allocate
+for this array. The second function that comes with get_allocator() is .construct(). This is used for constructing/emplacing values for the elements
+in the allocated array. This function takes 2 parameters, being the memory location and the value to fill it with. Next comes .destroy() which erases
+the value of the element in the array, but doesn't delete the memory space it was in at the time. This function, too, takes 1 parameter, being the
+memory location you want to erase from. The final function is .deallocate(). which finishes the job and deallocates the memory space. This takes 
+two parameters, which are the pointer to the array in the Vector (the variable you assigned it to), and the amount you want to delete. Formats:
+
+vectorName.get_allocator().allocate(amountToAllocate);
+vectorName.get_allocator().construct(where, value);
+vectorName.get_allocator().destroy(elementNumber);
+vectorName.get_allocator().deallocate(pointVar, amount);
+
+
+19. std::vector::insert();
+
+This function, like it sounds, inserts element(s) into the Vector. There are many ways of using this function, 3 of which I will cover right now.
+The other two are confusing, and frankly, I never use, and very rarely see people use it in their code. These variants are very close if not the
+exact same as those in the <array> header. The first takes two parameters, position and value to insert. This is used to insert one value. The
+second method takes three parameters, position, amount, and value. This is used to insert a single value into multiple locations, all in the same
+order. The last variant of insert() takes three parameters, the location where the values are to be stored in the receiveing Vector, the beginning
+of the range of the elements being transfered from the second Vector, and the end of that range. Formats:
+
+vectorName.insert(position, value);
+vectorName.insert(position, amount, value);
+vectorName.insert(position, rangeBegin, rangeEnd);
+
+
+20. std::vector::max_size();
+
+This function just returns the maximum amount of elements the Vector could hold. This number is massive, as it is the ammount of memory your computer
+still has left, or has allocated to the project you are working in. Takes no parameters. Format:
+
+vectorName.max_size();
+
+
+21. std::vector::operator=;
+
+This function is based on the equals sign (=) operator. It assigns new values to the elements in the Vector, and expands the Vector if necessary. You 
+can use it to copy the contents of one Vector to another, replacing the contents of the receiveing Vector. Format:
+
+receiveingVectorName = vectorToBeCopiedName;
+
+
+22. std::vector::operator[];
+
+This function, like in <array>, takes one parameter, using that to return the value of the element whos position was pushed in. Format:
+
+vectorName[position];
+
+
+23. std::vector::push_back();
+
+This is a very basic function, popping out the last element in the Vector, shrinking the capacity of the Vector by one. No parameters,
+no return value. Format:
+
+vectorName.pop_back();
+
+
+24. std::vector::push_back();
+
+About as easy as pop_back(), but instead pushes a new element to the back of the Vector. That element must be put in as a parameter, 
+and be the only parameter. No return value. Format:
+
+vectorName.push_back();
+
+
+25. std::vector::rbegin();
+
+Like in <array>, this takes no parameters, and returns a reference pointing at the last element in the Vector. This is const if the Vector
+is const-qualified, but defaults to a common reverse iterator. Format:
+
+vectorName.rbegin();
+
+
+26. std::vector::rend();
+
+Also like in <array>, returns a reverse iterator pointing to the first element that can be const, and takes no parameters. Format:
+
+vectorName.rend();
+
+
+27. std::vector::reserve();
+
+This function requests a change in capacity of the Vector. This takes one parameter in the form of an integer, representing the minimum capacity you'd
+want the Vector to have. This returns nothing, and does not change any of the elements in the Vector. Format:
+
+vectorName.reserve(amountToReserve);
+
+
+28. std::vector::resize();
+
+This function resizes the Vector to contain x amount of elements. If it is resized to be smaller than the amount of filled elements, those outside the
+new boundaries are destroyed, and deallocated. If it is increased past the amount of current elements and a value is passed in as a parameter, the new
+elements are all filled with that value. Nothing is returned. Format:
+
+vectorName.resize(newVectorSize);
+vectorName.resize(newVectorSize, valueToFill);
+
+
+29. std::vector::shrink_to_fit();
+
+This function requests the Vector to shrink the Vector capacity to fit its size. Takes no parameters, and returns nothing either. Format:
+
+vectorName.shrink_to_fit();
+
+
+30. std::vector::size();
+
+This function, the final of the 3 similar ones, returns the size of the Vector. This function takes no parameters. Format:
+
+vectorName.size();
+
+
+31. std::vector::swap();
+
+This final member function of the <vector> header, swap(), takes two Vectors, and swaps their contents, resizing them to fit the new elements 
+in the Vectors. Everything that has to do with the Vectors still remain valid for use. Takes one parameter, being the name of the second Vector
+in the swap. Format:
+
+swapVec1.swap(swapVec2);
