@@ -1,0 +1,311 @@
+Next up with the Containers, Sequence Containers, to be specific, the deque. (Pronouced Deck, but I prefer D-Queue). This just 
+stands for Double-Ended Queue. The deque is very similar to the Vector, it is dynamic, but the main difference is that you can
+modify a deque on both sides, front and back. Another difference is how they work internally. A Vector uses a single array inside
+that can be reallocated if necessary, meaning all the elements are adjacent to each other, so this can cause some memory problems
+when there are no sufficiently sized adjacent memory slots. The deque on the other hand, is not always guarranteed to store all 
+its elements adjacent to each other, so using offset pointers can and will cause some problems in the form of undefined behavior.
+When comparing this to other Sequence Containers, it is mush less efficient at modifying elements at positions in the Deque other
+than the front or back very frequently. For that, use Lists and Forward Lists.
+
+Again, like last time, this header file has so many similar or exact copies of member functions when comparing to Vectors or Arrays,
+so, like with the Vector lesson, only go into a lot of detail with the new ones, and just skim over the old ones. I will still make 
+a code snippet for them all, though, don't worry.
+
+To make a deque, it is very similar to other Sequence Containers, has multiple constructors (more on constructors in Classes), and
+uses similar formats. There are six ways of creating a new Deque, but I will go over the main 5 that I use. The last is just ehh,
+slightly confusing, and not as fast. You always have the same std::container<varType> containerName = {};, so I will not count that 
+as one of the 5, like in the last lessonFormats:
+
+1. std::deque<varType> dequeName;
+2. std::deque<varType> dequeName (elementAmount, valueToFillThoseElements);
+3. std::deque<varType> dequeName (iterationStart, iterationEnd);
+4. std::deque<varType> dequeName (dequeToCopy);
+5a. varType arrayName[elementAmount];
+5b. std::deque<varType> dequeName (arrayName, arrayName + sizeof(arrayName) / sizeof(int));
+
+These are exactly the same as in the <vector> header file, so if you need a recap on how or what these do, please refer back to that
+lesson. It not that I am lazy not explaining it here, I want to output more lessons, so the faster I get through one, the faster I 
+start another, the faster you get them. Overall, there are 31 member functions.
+
+1. std::deque::assign();
+
+Assign, like in the other header files you've learned about, assigns values to a specified amount of elements in the Deque. If there
+was a value there previously, it replaces it, and the size of the Deque changes, sometimes resulting in memory reallocation. Takes 2 
+parameters, amount of elements, and value for those elements. Format:
+
+dequeName.assign(elementsToFill, valueToFillThoseElements);
+
+
+2. std::deque::at();
+
+This, like with every other header, returns a reference to the element to which you request it access through parameter
+"location". If you aren't careful, and request a reference to an element outside the bounds of the deque, it will throw the 
+out_of_range exception. (More on exceptions later) Again, one parameter, the location of the element to access the reference to. 
+Format:
+
+dequeName.at(elementNumber);
+
+
+3. std::deque::back();
+
+Again, like most of these member functions, back() has the same use and result as those back() member functions from any
+other headers. Returns a reference to the first element in the deque, can be a const reference. Format:
+
+dequeName.back();
+
+4. std::deque::begin();
+
+Returns an iterator pointing to the beginning element in the Deque. Can be const iterator. No parameters. Format:
+
+dequeName.begin();
+
+
+5. std::deque::cbegin();
+
+Const version of begin(). Guarrantees to return a const iterator pointing to the beginning element in the Deque. No
+parameters. Iterator can be modified, but cannot be used to modify the Deque in any way. Format:
+
+dequeName.cbegin();
+
+
+6. std::deque::cend();
+
+Const version of end(). Guarrantees to return a const iterator pointing to the element after the last element in the Deque.
+No parameters. Iterator can be modified, but cannot be used to modify the Deque in any way. Format:
+
+dequeName.cend();
+
+
+7. std::deque::clear();
+
+Destroys all the elements and their values in the Deque, resizing the Deque to have a size of 0. Takes no parameters, and
+returns nothing. Format:
+
+dequeName.clear();
+
+
+8. std::deque::crbegin();
+
+Const version of rbegin(), returning a const reverse iterator to the beginning of the Deque. Basically, it points to the end
+of the Deque. Takes no parameters. Format:
+
+dequeName.crbegin();
+
+
+9. std::deque::crend();
+
+Const verson of rend(), returning a const reverse iterator to the end of the Deque. Basically, it points to the before the
+beginning element of the Deque. Takes no parameters. Format:
+
+dequeName.crend();
+
+
+10. std::deque::emplace();
+
+Emplaces a new element at a specified position in the Deque with a specified value. This basically just adds an element wherever
+you want with whatever value you wish, increasing the size of the Deque by one. Takes two parameters, and returns nothing. Format:
+
+dequeName.emplace(location, value);
+
+
+11. std::deque::emplace_back();
+
+Very similar to emplace(), but only requires one parameter to be passed in, being the value, as it always places that value 
+at the back of the Deque. Also increases the Deque's size by 1. There is only one parameter passed in, the value, and returns
+nothing, although an exception can be thrown if the function fails. emplace_back() forwards its parameter to 
+allocator_traits<allocator_type>::construct(), which can throw a bad_alloc exception. This may sound super complex, but basically,
+emplace_back() uses another function inside of itself to allocate the new memory that is required. If it fails to allocate said
+memory, the exception is thrown, resulting in the program terminating, and your Deque not changing. Format:
+
+dequeName.emplace_back(value);
+
+
+12. std::deque::emplace_front();
+
+Very similar to emplace(), but again, only requires one parameter to be passed in, the value. This function places an
+element with that value atthe beginning of the Deque. Like emplace_back(), can fail and throw a bad_alloc exception. Format:
+
+dequeName.emplace_front(value);
+
+
+13. std::deque::empty();
+
+This is a boolean function, meaning it returns True or False. This function checks if the Deque is empty or not, returning
+True if it is, False if it isn't. This cannot be used to modify the Deque in any way. Format:
+
+dequeName.empty();
+
+
+14. std::deque::end();
+
+Returns an iterator pointing to the theoretical element after the last element in the Deque. Can be const, but only if the 
+Deque is const, itself. Format:
+
+dequeName.end();
+
+
+15. std::deque::erase();
+
+This function can be used in 2 ways, to either erase 1 element, or a range of elements. It erases and destroys those elements
+and memory slots, opening them up for new elements to be stored there. Since this is a double ended queue, erasing from either
+side (front or back) of the Deque is very efficient, but from anywhere else is slow, and a much better operation for Lists or
+Forward Lists (up next). erase() can take up to two params, and returns an iterator that points at the element number of the
+element after the last erased element. If we had a Deque with elements 1 through 5, and deleted 1 through 3, the return value
+would be an iterator pointing at element 4, now element 1. Hope that clears it up a tad. Formats:
+
+dequeName.erase(singleElement);
+dequeName.erase(firstElement, lastElement);
+
+
+16. std::deque::front();
+
+This does the same exact thing as begin(), but with one key change in the result. Instead of a iterator pointing at the first
+element, this function returns a direct reference to the first element, or const reference, if the Deque is const itself.
+Reference basically means it sends a modifiable reference to the object, meaning, using that reference you can directly modify
+it. Takes no parameters. Format:
+
+dequeName.front();
+
+
+17. std::deque::get_allocator();
+
+This is just like in <vector>, it is a function that houses 4 other functions in itself. To call those, you need to call this
+first. Those functions are the same and do the same thing, but here they are anyway. One allocates x amount of memory, one fills
+that memory with values, one erases the valuesfrom the elements, and the last destroys them, opening up the memory space again. 
+The parameters for the four are the amount to allocate for the first, where and the value to assign in the second, the element
+number for the third, and the pointer variable to assign to, and the amount to delete. Formats:
+
+dequeName.get_allocator().allocate(amountToAllocate);
+dequeName.get_allocator().construct(where, value);
+dequeName.get_allocator().destroy(elementNumber);
+dequeName.get_allocator().deallocate(pointVar, amount);
+
+
+18. std::deque::insert();
+
+This function inserts an element or a range of elements into the Deque. Like in <vector>, there are many ways of using this 
+function, but I only use three of the five methods. The first takes two parameters, position and value to insert. This is
+used to insert one value. The second method takes three parameters, position, amount, and value. This is used to insert a
+single value into multiple locations, all in the same order. The last variant of insert() takes three parameters, the location
+where the values are to be stored in the receiveing Deque, the beginning of the range of the elements being transfered from
+the second Deque, and the end of that range. Formats:
+
+dequeName.insert(position, value);
+dequeName.insert(position, amount, value);
+dequeName.insert(position, rangeBegin, rangeEnd);
+
+
+19. std::deque::max_size();
+
+Returns the maximum value of the Deque. Keep in mind this is the max potential size it can reach. If the current size or
+requested size increase exceeds this number, it can throw an exception and terminate the action/entire program. No parameters.
+Format:
+
+dequeName.max_size();
+
+
+20. std::deque::operator=;
+
+This, like in all headers, puts new data into the Deque, replacing the contents currently inside the element(s) you are replacing
+and changing the size of the Deque to fit the new element amount. There are three methods of using this operator, the copy, the
+move, and the initializer list methods. The first copies all elements from the giving object into the Deque, the second moves from
+the giving object into the Deque, removing them from the giving, and the initializer list is just assigning a newly initialized
+Deque, but I only use the first and last typically. No parameters, unless using initializer list and you want to have something
+in the newly initialized Deque. Formats:
+
+receivingDequeName = givingDequeName;
+receivingDequeName = std::deque<varType>();
+
+
+21. std::deque::operator[];
+
+This operator is used to get the reference to an element in the Deque, like at(), but since it is not bound-checked, it won't throw an
+exception (out_of_range to be exact) if the element requested is outside the bounds of the Deque. Two common uses for this function
+are accessing one element to read/write it, and to reverse Deques (or the container for which you use this function for.) One
+parameter, being the element number you wish to read/write. Format:
+
+dequeName[elementNumber];
+
+
+22. std::deque::pop_back();
+
+Pops out the last element in the Deque, size decreases by one. The memory space is not retained, it is destroyed. No parameters. Format:
+
+deqName.pop_back();
+
+
+23. std::deque::pop_front();
+
+Because this is a Deque, a Double Ended QUEue, it has two ends from which we can efficiently pop or push elements to, so we also have a
+pop_front() function which does exactly the same thing as pop_back(), but in the front of the Deque. Takes no parameters. Format:
+
+deqName.pop_front();
+
+
+24. std::deque::push_back();
+
+Pushes the value you put in as the single parameter to the end of the Deque, increasing its size by one. This can throw the bad_alloc
+exception. Format:
+
+deqName.push_back(value);
+
+
+25. std::deque::push_front();
+
+Like push_back(), it pushes a new element with value val that you put into the parameters list, increasing the size of the Deque by one.
+Can throw bad_alloc exception. Format:
+
+deqName.push_front(value);
+
+
+26. std::deque::rbegin();
+
+This function returns a reverse iterator that points to the reverse first element of the Deque, the last element. This is different from
+back(), because this one returns a reverse random access iterator (long name for reverse iterator), and back() returns a reference. Takes
+no parameters. Format:
+
+deqName.rbegin();
+
+
+27. std::deque::rend();
+
+This function returns a reverse iterator to the reverse end, the theoretical pre-beginning element of the Deque. Takes no parameters. Format:
+
+deqName.rend();
+
+
+28. std::deque::resize();
+
+This function resizes the deque to contain the amount of elements you wish. This number has to be passed in as a single parameter for this
+function. If the new Deque size is smaller than the previous size, it deletes all the elements and frees their memory slots for anything
+else that may requre them. If you increase the size, it will fill the newly alloted slots with zeros (0). You can also specify what value
+you would want it to fill the new slots with by adding another parameter in the parameter list. Make sure to be careful with your variable
+types when filling those new slots. Formats:
+
+deqName.resize(newSize);
+deqname.resize(newSize, valueToFillNewSlots);
+
+
+29. std::deque::shrink_to_fit();
+
+As you can probably guess by the name of this member function, it requests the Deque to shrink down its memory space to its current size.
+This function doesn't change the size of the Deque, only shrinks the memory alloted to it down. No parameters. Format:
+
+deqName.shrink_to_fit();
+
+
+30. std::deque::size();
+
+We have used this function many times already in this lesson, it just returns the size of the Deque in unsigned int form. It takes no
+parameters. Format:
+
+deqName.size();
+
+
+31. std::deque::swap();
+
+This is the last member function of the <deque> header. It takes two Deques, and swaps their contents, as long as they have the same type.
+They do not need to have the same length, unless they are const, in which case, all the functions that modify the Deque in some way won't
+work on them. Takes one parameter, being the second Deque in the exchange. Format:
+
+firstDeqName.swap(secondDequeName);
