@@ -1,0 +1,271 @@
+Forward lists are sequence containers that allow constant-time insert and erase operations anywhere within the sequence.
+
+Forward lists are used as singly-linked lists, lists that can hold values scattered across your memory, but still work 
+fast and well. The ordering is kept by the association to each element of a link to the next element in the sequence.
+
+The main design difference between a forward_list container and a list container is that the first keeps internally only a link 
+to the next element, while the latter keeps two links per element, one for the next, and one for the previous element. This
+allows forward_lists to take up slightly less memory than other sequence container objects, and also speeds up accessing its
+elements. The downside to this is that forward_lists only iterate, and can only be iterated forwards, making them slightly more
+difficult to traverse in search of elements. Forward_lists also excel at the insertion, extraction, and moving of elements
+between points of the object, which can be helpful in many ways. Easily the biggest problem with this object is accessing
+non-outlier elements. To access an element somewhere in the middle of the object, one has to start at the beginning, and then
+iterate through the object to access said element. This consumes a lot of time (in comparison to Arrays, Deques, and Vectors),
+as well as taking more memory to store the links between elements.
+
+Forward_list was made to be efficient. This can be seen in one very clear example. Forward_list is the only standard container
+class that deliberately lacks a size member function for efficiency. Having a size member that takes constant time would require
+it to keep an internal counter for its size (list does this, not forward_list). This would consume some extra storage and make
+insertion and removal operations slightly less efficient. There is a way around this, and that is finding the distance by 
+iterating through the entire object and for each iteration, adding 1 to some counter variable.
+
+In the forward_list header file, there are a lot of new member functions that you may have not seen in the other Sequence Container
+tutorials I've done, so there will be more in depth explanations for each. There 5 ways of constructing a forward_list.
+
+1. std::forward_list<varType> flName;
+2. std::forward_list<varType> flName (elementAmount, valueToFillThoseElements);
+3. std::forward_list<varType> flName (iterationStart, iterationEnd);
+4. std::forward_list<varType> flName (forward_listToCopy);
+5. std::forward_list<varType> flName (std::move(flToMoveFrom));
+6. std::forward_list<varType> flName = { values }; (This can only be used as of C++11 and onward. To compile in C++11 architechture,
+in your compile command (g++, gcc, etc), make sure to put -std=c++11 or -std=c++17 to make it run well.)
+
+These are very similar to the rest of the Sequence Container header file constructors, but with 1 main difference, #5. In #5, we
+see a new std function. This is std::move. It can be found in the <utility> header file, and is used to move the values of an
+object to a different object.
+
+Overall, in this header file, there are 27 member functions.
+
+1. std::forward_list::assign();
+
+Assign, again, is the function used to assign some values to the forward_list, and can be used in 3 different ways. Formats:
+
+flName.assign(elementsToFill, valueToFillThoseElements);
+flName.assign(iterationStart, iterationEnd);
+flName.assign( values );
+
+
+2. std::forward_list::before_begin();
+
+This function returns an iterator to the theoretical position before the first element in the forward_list. This can be a const
+iterator if the forward_list itself is const. As a recommendation, this function should only be used in tandem with empace_after,
+erase_after, splice_after, and insert_after, and the return variable should not be dereferenced at any point in time. Format:
+
+flName.before_begin();
+
+
+3. std::forward_list::begin();
+
+This function, like it does with other header files, returns an iterator that points to the first element in the object. The one
+difference between this function and other begin() functions, is that it returns a forward_iterator. This can be a const iterator.
+Format:
+
+flName.begin();
+
+
+4. std::forward_list::cbefore_begin();
+
+This function is the const-guarranteed version of before_begin(). Format:
+
+flName.cbefore_begin();
+
+
+5. std::forward_list::cbegin();
+
+This is the const-guarranteed version of begin(). Format:
+
+flName.cbegin();
+
+
+6. std::forward_list::cend();
+
+This is the const-guarranteed version of end(). Format:
+
+flName.cend();
+
+
+7. std::forward_list::clear();
+
+This function clears out the elements from the object, and destroys them, opening up memory space, and making the object's size 0.
+Format:
+
+flName.clear();
+
+
+8. std::forward_list::emplace_after();
+
+This function takes an element value, and emplaces it after some position. It takes 2 parameters, being the element value(s), and 
+the position after which to emplace this element. Format:
+
+flName.empace_after(position, value);
+
+
+9. std::forward_list::emplace_front();
+
+This function emplaces an element value into the front of the object. It then becomes the beginning element. The function takes one
+parameter, the element value you want to emplace. Format:
+
+flName.emplace_front(value);
+
+
+10. std::forward_list::empty();
+
+This function returns a boolean value for whether the obejct is empty or not. The function takes no parameters. Format:
+
+flName.empty();
+
+
+11. std::forward_list::end();
+
+This function returns an iterator that points to the after-last element in the object. In the case that the forward_list is empty, 
+the  iterator that is returned points to the first (empty) element. Takes no parameters. Format:
+
+flName.end();
+
+
+12. std::forward_list::erase_after();
+
+This function erases and destroys any element or list of elements in the object. This function returns an iterator to the element
+immediately after the last element destroyed. There are two different argument sets you can put into the arglist. To erase one
+element, just push the number of the element into the arglist, but to delete a range of elements, input the first and last element
+numbers. Format:
+
+flName.erase_after(elementNumber);
+flName.erase_after(firstElement, lastElement);
+
+
+13. std::forward_list::front();
+
+Returns a direct reference to the first element in the object. The function takes no parameters. Format:
+
+flName.front();
+
+
+14. std::forward_list::get_allocator();
+
+Returns the allocator object that associates with the object. Takes no parameters. Format:
+
+flName.get_allocator();
+
+
+15. std::forward_list::insert_after();
+
+This function is similar to emplace_after, but instead of copying the elements into the new object, this one copies them directly.
+The return value is an iterator pointing at the last newly inserted element in the object, but if no new elements were added, it 
+just points to the position where they would've been added had something not gone wrong or you weren't trying to copy from an empty
+container. There are three ways this function can take parameters. The first and most common is (position, value). This just takes a
+single value and inserts it as a new element in the container object. The second is similar to the first, but with one more argument,
+(pos, amount, value). The amount value is for how many of the same value you want to insert. The third argument pattern is the the 
+copy pattern. This is (position, transferBeginPos, transferEndPos), and starts from wherever the transferBeginPos is, and will
+begin inserting from the specified position, and will stop when transferEndPos has been reached. Formats:
+
+flName.insert_after(pos, val);
+flName.insert_after(pos, amount, val);
+flname.insert_after(pos, transBegPos, transEndPos);
+
+
+16. std::forward_list::max_size();
+
+This function checks and returns an unsigned int representing the amount of max memory space you can allot to the container object.
+Format:
+
+flName.max_size();
+
+
+17. std::forward_list::merge();
+
+This function merges x into the forward_list by transferring all of its elements at their respective ordered positions into the container
+(both containers shall already be ordered). This effectively removes all the elements in x (which becomes empty), and inserts them into
+their ordered position within container (which expands in size by the number of elements transferred). The operation is performed without
+constructing nor destroying any element: they are transferred, no matter whether x is an lvalue or an rvalue, or whether the value_type
+supports move-construction or not. The template versions with two parameters (2), have the same behavior, but take a specific predicate
+(comp) to perform the comparison operation between elements. This comparison shall produce a strict weak ordering of the elements (i.e.,
+a consistent transitive comparison, without considering its reflexiveness). This function requires that the forward_list containers have
+their elements already ordered by value (or by comp) before the call. For an alternative on unordered lists, see list::splice. Assuming
+such ordering, each element of x is inserted at the position that corresponds to its value according to the strict weak ordering defined
+by operator< or comp. The resulting order of equivalent elements is stable (i.e., equivalent elements preserve the relative order they had
+before the call, and existing elements precede those equivalent inserted from x). Formats:
+
+flName.merge(x);
+flName.merge(x, comp);
+
+
+18. std::forward_list::operator=;
+
+This function just uses the assignment operator, and assigns something to something. Format:
+
+flName = otherFlName;
+
+
+19. std::forward_list::pop_front();
+
+This function removes and destroys the first element in the container object. Format:
+
+flName.pop_front();
+
+
+20. std::forward_list::push_front();
+
+This function takes one parameter (val), and pushes said value into a new element at the beginning of the object. Format:
+
+flName.push_front(val);
+
+
+21. std::forward_list::remove();
+
+This function takes one parameter, and looks for any iterations of that value in the object. If it finds any, they are removed and destroyed.
+Format:
+
+flName.remove(val);
+
+
+22. std::forward_list::resize();
+
+This function resizes the container object to parameter value (size). If you want to increase the size, you can also put in another parameter
+argument (val), which will use the value, and fill all the new spaces with it. Format:
+
+flName.resize(size);
+flName.resize(size, val);
+
+
+23. std::forward_list::reverse();
+
+Reverses the order of the elements in the container object. Format:
+
+flName.reverse();
+
+
+24. std::forward_list::sort();
+
+This function sorts, by default, sorts the forward_list from least to greatest. By inputting different functions or operators into the paramArgs,
+the functionality changes. Format:
+
+flName.sort(potentialArgs);
+
+
+25. std::forward_list::splice_after();
+
+Transfer elements from another forward_list into the container by inserting them after the element pointed by (pos). This effectively inserts those
+elements into the container and removes them from the transfering object, altering the sizes of both containers. The operation does not involve the
+construction or destruction of any element. They are transferred, no matter whether the forward_list is an lvalue or an rvalue, or whether the
+value_type supports move-construction or not. There are three ways to use this function. The first version transfers all the elements of on object into
+the container. The second version transfers only the element pointed by i from one object into the container. The third version transfers the range
+(first,last) from one object into the container. Formats:
+
+flName.splice_after(insertLocation, objectToCopy);
+flName.splice_after(insertLocation, objectToCopy, objectToCopySingleElement, iterator);
+flName.splice_after(insertLocation, objectToCopyRangeBegin, objectToCopyRangeEnd, iterator);
+
+
+26. std::forward_list::swap();
+
+Swaps the elements of the two forward_lists in the function call. Takes one parameter, being the second of the two containers. Format:
+
+flName.swap(flNameTwo);
+
+
+27. std::forward_list::unique();
+
+This function just removes any duplicate values. Format:
+
+flName.unique();
