@@ -1,0 +1,251 @@
+Maps are containers that hold elements in a key-value combination, following a specific order. In a map, the key values are
+generally used to sort and uniquely identify the elements, while the mapped values store the content associated to this key.
+The unique keys are all sorted using a comparison function which can be overwritten by the programmer. The types of key and
+mapped value may differ, and are grouped together in member type value_type, which is a pair type combining both:
+
+typedef pair<const Key, T> value_type;
+
+
+Internally, the elements in a map are always sorted by its key following a specific strict weak ordering criterion indicated by its
+internal comparison object (of type Compare). Map containers are generally slower than unordered_map containers to access individual
+elements by their key, but they allow the direct iteration on subsets based on their order. The mapped values in a map can be accessed
+directly by their corresponding key using the bracket operator ((operator[]).
+
+Maps are typically implemented as binary search trees, also known as red-black tree diagrams.
+
+To construct a map object, there are a couple things you could do. In my header file (13_Map.h), you will see, there is no output of
+the function representing these methods. Maps are typically initialized empty, and added onto later, but can have elements inserted 
+at contruction. I just prefer to use the first way. Here's the five ways I managed to come up with:
+
+1. std::map<type1, type2> mapName;
+2. std::map<type1, type2> mapName (copyMapBeginIteration, copyMapEndIteration);
+3. std::map<type1, type2> mapName (copyMap);
+4. std::map<type1, type2, comparisonFunction> mapName;
+5. std::map<type1, type2, comparisonFunctionPointer> mapName;
+
+All together, there are 27 member functions.
+
+1. std::map::at();
+
+This is the accessor method for maps. It is used to return a reference to the mapped value that has the key input in the parameters.
+This function commonly throws errors, so make sure your keys are typed out correctly, case-sensitively. If a key that does not exist
+is put into the function parameter list, the function throws the out_of_range exception. This can return a const mapped_type reference
+if the map itself is const-qualified. This is a C++11 function, so make sure to compile as C++11 or higher if you are using this. Format:
+
+mapName.at(key);
+
+
+2. std::map::begin();
+
+Returns an iterator (or const_iterator) that refers to the first element in the map according to the map object's sorting function.
+The function takes to parameters. Format:
+
+mapName.begin();
+
+
+3. std::map::cbegin();
+
+Const version of begin(). Takes no parameters. C++11 function. Format:
+
+mapName.cbegin();
+
+
+4. std::map::cend();
+
+Const version of end(). Takes no parameters. C++11 function. Format:
+
+mapName.cend();
+
+
+5. std::map::clear();
+
+Clears and destroys all element keys and values from the map object, effectively clearing up memory. The size of the map becomes 0.
+Takes no parameters. Format:
+
+mapName.clear();
+
+
+6. std::map::count();
+
+This is a very interesting and useful member function of map. Basically, it goes through the entire map, and returns a boolean-like value
+based on what exists in the map object. It takes one parameter, being the key you are searching for. If it finds a key that equals your key
+input parameter, the function returns an unsigned_int value of 1, otherwise, it returns an unsigned_int value of 0. This is basically just a
+boolean, but in integer form. Format:
+
+mapName.count(keyValue);
+
+
+7. std::map::crbegin();
+
+This is the function that returns a const_reverse_iterator that points to the reverse beginning (the end) of the map object. If you really want
+to mess with your head, keep in mind that this is a bidirectional iterator, meaning back and front is both sides simultaneously. How's that for 
+brain food? Takes no parameters. This is a C++11 function. Format:
+
+mapName.crbegin();
+
+
+8. std::map::crend();
+
+This is the end version of the const_reverse_iterator pointer member functions. It points at the reverse end (pre-first) element in the map object.
+This is a C++11 function, and takes no parameters. Format:
+
+mapName.crend();
+
+
+9. std::map::emplace();
+
+This is a very important member function in this header, and has to be used very carefully if you do not want weird results to happen. If the new
+key that is being emplaced into the map already exists, the new element will not be added, and nothing happens, the program keeps on working. This 
+is a C++11 function. It takes 2 parameters, the key and the mapped value. Format:
+
+mapName.emplace(key, value);
+
+
+10. std::map::emplace_hint();
+
+This function is very similar to emplace(), but has an extension, the _hint() part. Even though the map will still sort the element in using its own 
+comparison function, this helps the object speed up the process. It is like the "guess" function on a graphing calculator when evaluating equations.
+The function returns an iterator to the newly mapped element, if the insertion is successful, otherwise, nothing is returned. The function takes 3
+parameters, key, value, and location. Watch the ordering carefully. This is a C++11 function. Format:
+
+mapName.emplace_hint(location, key, value);
+
+
+11. std::map::empty();
+
+This function returns a boolean (1 - True, or 0 - False) based on whether the map object is empty or not. Takes no parameters. Format:
+
+mapName.empty();
+
+
+12. std::map::end();
+
+This is the function that returns a pointer to the theoretical post-end element. It takes no parameters. Format:
+
+mapName.end();
+
+
+13. std::map::equal_range();
+
+This function returns the bounds of a range that includes all the elements in the container which have a key equivalent to "key", a parameter in the
+paramlist. Since the elements in a map all have unique keys, the range returned will contain a single element at most. If no matches are found, the
+range returned has a length of zero, with both iterators pointing to the first element that has a key considered to go after "key" according to the
+container's internal comparison object or function (key_comp). Two keys are considered equivalent if the container's comparison object returns false
+reflexively (i.e., no matter the order in which the keys are passed as arguments). This function takes one parameter, key. Format:
+
+mapName.equal_range(key);
+
+
+14. std::map::erase();
+
+This function deletes the element specified in the parameter list with variable "element", "element begin" and "element end" to erase a range of them.
+Formats:
+
+mapName.erase(key/element);
+mapName.erase(firstElement, lastElement);
+
+
+15. std::map::find();
+
+This function returns an iterator pointing at the found element in a map object. The element is found based on its key that is passed in via parameter list.
+Takes one parameter, the key. Format:
+
+mapName.find(key);
+
+
+16. std::map::get_allocator();
+
+This version of get_allocator() has 5 different functions in itself. The first 4, we know, and the last one is familiar. It is used very differently in
+the <map> header. It is typically used to associate an allocator_type with a variable for cross-checking the specific types of varTypes in the map itself.
+Formats:
+
+mapName.get_allocator().allocate(amountToAllocate);
+mapName.get_allocator().construct(where, value);
+mapName.get_allocator().destroy(elementNumber);
+mapName.get_allocator().deallocate(pointVar, amount);
+mapName.get_allocator();
+
+
+17. std::map::insert();
+
+This function just inserts an element with Key and Value into the location requested. Can also be a list of elements. The element to be inserted must be in
+pair form (std::pair<varType, varType>) with the varTypes that correspond to both the map and the element. Formats:
+
+mapName.insert(std::pair<varType, varType>(key, value));
+mapName.insert(rangeOfPairs);
+
+
+18. std::map::key_comp();
+
+This function returns a copy of the key_comparison object that is used by the map object. Takes no paramters. Format:
+
+mapName.key_comp();
+
+
+19. std::map::lower_bound();
+
+This function returns the lower_bound of the key passed in the paramList. Lower_bound is an iterator to the the first element in the container whose key
+is not considered to go before "key". Takes only one parameter, key. Format:
+
+mapName.lower_bound(key);
+
+
+20. std::map::max_size();
+
+Like all other max_size functions, it returns an unsigned_int value of the amount of elements the map could theoretically store. Takes no parameters. Format:
+
+mapName.max_size();
+
+
+21. std::map::operator=;
+
+This is just the normal assignment operator. Assigns elements to a map by copying them. Is incapable of taking parameters. Format:
+
+mapName = mapName2;
+
+
+22. std::map::operator[];
+
+This is the access element function that works like in every other header file. If you input a key whose value exists, it will return the value of that element, 
+otherwise, the map will create a new element with given key, but no mapped value. This function takes one parameter, the key. By the way, here is a fun way of screwing
+around with code, if you want to use this function without using [], but also taking much longer to write it out: 
+(*((this->insert(make_pair(k,mapped_type()))).first)).second
+Format:
+
+mapName[key];
+
+
+23. std::map::rbegin();
+
+This is the reverse version of the begin function, returning an iterator that points to the last element in the map. Takes no parameters. Format:
+
+mapName.rbegin();
+
+
+24. std::map::rend();
+
+This is the reverse version of the end function, returning an iterator that points to the theoretical before-first element in the map. Takes no parameters. Format:
+
+mapName.rend();
+
+
+25. std::map::size();
+
+This function returns the current size value in a unsigned_int form. Takes no parameters. Format:
+
+mapName.size();
+
+
+26. std::map::swap();
+
+This function exchanges the contents of 2 maps between each other, as long as they are compatible with each other. Takes one parameter. Format:
+
+mapName1.swap(mapName2);
+
+
+27. std::map::upper_bound();
+
+This function returns a pointer to the first element in the map that is considered to go after "key". It is like lower_bound, but the other way. Takes one parameter, key.
+Format:
+
+mapName.upper_bound(key);
