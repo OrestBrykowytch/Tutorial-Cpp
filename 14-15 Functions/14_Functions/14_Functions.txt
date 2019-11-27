@@ -1,0 +1,37 @@
+Alright, so, now we move on to functions. Functions are a structure that allows for use and reuse of the same code, basically
+forever. Functions in classes are called member functions or methods, but on their own, they are just functions. The syntax
+for a function in C++ is very simple, and because C++ is typesafe, function declarations are very explicit. (Not to be confused
+with the "explicit" C++ keyword which is found in classes) Keep in mind, you've been using functions for a really long time,
+basically from the beginning of your C++ learning time. The syntax for a function declaration is:
+
+returnType functionName(parameterList);
+
+To define a function, you have to write:
+
+returnType functionName(parameterList)
+{
+    Function code in here
+}
+
+To call a function (use it), you must write:
+
+functionName(parameters);
+
+That's it.
+
+A very important thing to know about functions is the returnType and return keyword. The returnType is the type of value you will
+return at some point in the function. It's exactly like varType. Imagine, a function returns a unnamed single-time variable with a
+value of type returnType. Otherwise, the function won't return the value. There is also a way to prevent anything from being returned,
+and that is through using the "void" returnType. ReturnType can be the name of any standard C++ varType, class name, enum name, etc.
+
+Not every function requires paramters, as you've seen previously. A parameter list is the place where you list any and all parameter
+types and names. If you don't want any paramters, there is no need to put any parameters in the list, but if you want more than 1,
+you will have to split the names with commas. Look at the add function in the .h file. Let's analyze this.
+
+So, we see that it has a return type of int, takes 2 paramters, an int and an int, named a and b, and returns the value of a and b
+added together. This is quite a boring function. Let's see what else we can do.
+
+Our next function, printGreeting(), is of type void, so it won't return a value, and takes no paramters. It still has a function body,
+though, so it will still execute everything inside, just the only difference is it won't return anything. These functions are typically
+called by themselves and do something standalone. Quick note: std::cout is not a return function, only the return keyword affects what
+returns.
